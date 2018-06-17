@@ -10,8 +10,9 @@ import java.sql.Connection;
  * @version 1.0
  */
 public class IDatabaseImpl implements IDatabase {
+    
     /**
-     * getConnection() - liefert ein konsistentes Medium zur Oracle-DB
+     * Methode getConnection - liefert ein konsistentes Medium zur Oracle-DB
      * @return java.sql.Connection
      */
     @Override
