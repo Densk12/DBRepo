@@ -1,5 +1,7 @@
 package db2versuch3.konsole.lagerkonsole;
 
+import db2versuch3.fachlogik.lagersteuerung.impl.ILagerOracleSteuerungImpl;
+import db2versuch3.fachlogik.lagersteuerung.services.ILagerOracleSteuerung;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,6 +16,7 @@ public class Hauptprogramm {
 
     public static void main(String[] args) {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        int choice = -1;
 
         do {
             System.out.println("\n\tMenue:");
@@ -22,7 +25,7 @@ public class Hauptprogramm {
             System.out.println("\n\t  -");
             System.out.println("\n\t  -Beenden            (0)");
 
-            int choice = -1;
+            choice = -1;
             do {
                 System.out.print("\n\tEingabe: ");
 
@@ -38,8 +41,16 @@ public class Hauptprogramm {
 
             switch (choice) {
                 case 1:
-                    
+                    ILagerOracleSteuerung lagerSteu = new ILagerOracleSteuerungImpl();
 
+                    try {
+                        lagerSteu.lagerCSVErstellen();
+                        
+                    } catch (Exception e) {
+                        String error = "\n\tFehler! Es konnte keine Lager.csv Datei";
+                        error += "erstellt werden\n\t" + e.toString();
+                        System.err.println(error);
+                    }
                     break;
             }
 

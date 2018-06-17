@@ -1,7 +1,6 @@
 package db2versuch3.datenhaltung.lagerdatencsv.service;
 
-import db2versuch3.datenhaltung.oracledb.entities.Lager;
-import java.util.List;
+import java.sql.Connection;
 
 /**
  * Schnittstellenklasse ILagerVerwaltung
@@ -9,5 +8,6 @@ import java.util.List;
  * @version 1.0
  */
 public interface ILagerDaten {
-    public abstract boolean lagertToCSV(List<Lager> lagerListe);
+    public abstract void setConnection(Connection connection);
+    public abstract void lagertToCSV() throws Exception;
 }

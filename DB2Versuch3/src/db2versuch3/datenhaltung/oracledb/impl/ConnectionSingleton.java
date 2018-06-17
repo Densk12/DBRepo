@@ -14,15 +14,15 @@ public class ConnectionSingleton {
 
     private static ConnectionSingleton instance;
     private Connection connection;
-    
-    static ConnectionSingleton getInstance() {
-        if(instance == null) {
+
+    static ConnectionSingleton getInstance() throws SQLException {
+        if (instance == null) {
             instance = new ConnectionSingleton();
         }
         return instance;
     }
 
-    private ConnectionSingleton() {
+    private ConnectionSingleton() throws SQLException {
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
         } catch (ClassNotFoundException e) {
@@ -31,19 +31,13 @@ public class ConnectionSingleton {
             System.exit(-1);
         }
 
-        try {
-            OracleDataSource ods = new OracleDataSource();
-            String url = "jdbc:oracle:thin:dbprak23/db2017@//schelling.nt.fh-koeln.de:1521/xe";
-            ods.setURL(url);
+        OracleDataSource ods = new OracleDataSource();
+        String url = "jdbc:oracle:thin:dbprak23/db2017@//schelling.nt.fh-koeln.de:1521/xe";
+        ods.setURL(url);
 
-            connection = ods.getConnection();
-        } catch (SQLException e) {
-            String error = "\n\tFehler! Es konnte keine Verbindung zur Datenbank hergestellt werden!\n\t" + e.toString();
-            System.err.println(error);
-            System.exit(-1);
-        }
+        connection = ods.getConnection();
     }
-    
+
     public Connection getConnection() {
         return connection;
     }

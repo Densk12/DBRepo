@@ -19,19 +19,16 @@ public class ILagerOracleSteuerungImpl implements ILagerOracleSteuerung {
      /**
      * Methode lagerCSVErstellen - veranlasst die Erzeugung der Lager.csv-Datei
      *
-     * @return boolean
      */
     @Override
-    public boolean lagerCSVErstellen() {
-        boolean ret = false;
-        
+    public void lagerCSVErstellen() throws Exception {
         IDatabase database = new IDatabaseImpl();
         Connection connection = database.getConnection();
         
         ILagerDaten lagerDaten = new ILagerDatenImpl();
         
-        
-        return ret;
+        lagerDaten.setConnection(connection);
+        lagerDaten.lagertToCSV();
     }
     
 }

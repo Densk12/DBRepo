@@ -1,11 +1,12 @@
 package db2versuch3.datenhaltung.lagerdatencsv.impl;
 
-import db2versuch3.datenhaltung.oracledb.entities.Lager;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import db2versuch3.datenhaltung.lagerdatencsv.service.ILagerDaten;
+import java.io.File;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  * Klasse ILagerVerwaltungImpl - Implementiert alle Methoden der
@@ -15,49 +16,72 @@ import db2versuch3.datenhaltung.lagerdatencsv.service.ILagerDaten;
  */
 public class ILagerDatenImpl implements ILagerDaten {
 
-    /**
-     * Methode lagerToCSV - erzeugt aus der gegebenen Liste eine Lager.csv-Datei
-     *
-     * @param lagerListe List<Lager> - Abbildung der Tabelle LagerTa
-     * @return boolean
-     */
-    @Override
-    public boolean lagertToCSV(List<Lager> lagerListe) {
-        boolean ret = false;
+    private Connection connection;
 
-        PrintWriter pw = null;
-        try {
-            pw = new PrintWriter(new FileWriter("Lager.csv"), true);
-
-        } catch (IOException e) {
-            String error = "\n\tFehler! Es konnte keine Lager.csv Datei";
-            error += "erstellt werden\n\t" + e.toString();
-            System.err.println(error);
-            System.exit(-1);
-        }
-
-        String[] metaData = new String[]{"LNR", "LORT", "LPLZ", "ANZART"};
-
-        int i;
-        for (i = 0; i < metaData.length - 1; i++) {
-            pw.print("\"" + metaData[i] + "\";");
-        }
-        pw.println("\"" + metaData[i] + "\"");
-
-        if (lagerListe != null && lagerListe.size() > 0) {
-            for (i = 0; i < lagerListe.size(); i++) {
-                pw.print(lagerListe.get(i).getLnr()+";");
-                pw.print(lagerListe.get(i).getLort()+";");
-                pw.print(lagerListe.get(i).getLplz()+";");
-                pw.println(lagerListe.get(i).getAnzart()+"");
-            }
-            
-            ret = true;
-        } else {
-            pw.println("Keine Datensätze verfügbar!");
-        }
-
-        return ret;
+    public ILagerDatenImpl() {
     }
 
+    public void setConnection(Connection connection) {
+        if (connection != null) {
+            this.connection = connection;
+        }
+    }
+
+    /**
+     * Methode lagerToCSV - erzeugt aus der LagerTa Tabelle eine Lager.csv-Datei
+     */
+    @Override
+    public void lagertToCSV() throws Exception {
+        if (connection != null) {
+            ResultSet rs = null;
+
+            try {
+                Statement stm = connection.createStatement();
+
+                String sql = "SELECT LA.LNR, LA.LORT, LA.LPLZ FROM LAGERAT LA";
+                rs = stm.executeQuery(sql);
+
+                PrintWriter pw = null;
+
+                pw = new PrintWriter(new FileWriter("Lager.csv"), true);
+
+                String[] metaData = new String[]{"LNR", "LORT", "LPLZ", "ANZART"};
+
+                int i;
+                for (i = 0; i < metaData.length - 1; i++) {
+                    pw.print("\"" + metaData[i] + "\";");
+                }
+                pw.println("\"" + metaData[i] + "\"");
+
+                for (i = 0; rs.next(); i++) {
+                    int lnr = rs.getInt("LA.LNR");
+                    String lort = rs.getString("LA.LORT");
+                    String lplz = rs.getString("LA.LPLZ");
+
+                    sql = "SELECT COUNT(*) ANZART FROM TABLE(SELECT ARTIKELLISTE ";
+                    sql += "FROM LAGERAT LA WHERE LA.LNR = " + lnr + ")";
+                    int anzart = stm.executeQuery(sql).getInt("ANZART");
+
+                    pw.print(lnr + ";");
+                    pw.print(lort + ";");
+                    pw.print(lplz + ";");
+                    pw.println(anzart + "");
+                }
+
+                if (i == 0) {
+                    pw.println("Keine Datensätze verfügbar!");
+                }
+
+                rs.close();
+                stm.close();
+
+            } catch (Exception e) {
+                File lagerFile = new File("Lager.csv");
+                if (lagerFile.exists()) {
+                    lagerFile.delete();
+                }
+                throw new Exception(e);
+            }
+        }
+    }
 }
