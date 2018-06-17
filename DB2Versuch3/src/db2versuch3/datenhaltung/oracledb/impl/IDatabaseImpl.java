@@ -1,0 +1,22 @@
+package db2versuch3.datenhaltung.oracledb.impl;
+
+import db2versuch3.datenhaltung.oracledb.services.IDatabase;
+import java.sql.Connection;
+
+/**
+ * Klasse IDatabaseImpl - Implementiert alle Methoden der Schnittstellenklasse
+ * IDatabase. Bietet nach aussen den Zugriff zur Oracle-DB an
+ * 
+ * @version 1.0
+ */
+public class IDatabaseImpl implements IDatabase {
+    /**
+     * getConnection() - liefert ein konsistentes Medium zur Oracle-DB
+     * @return java.sql.Connection
+     */
+    @Override
+    public Connection getConnection() {
+        return ConnectionSingleton.getInstance().getConnection();
+    }
+    
+}
