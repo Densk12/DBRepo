@@ -106,7 +106,7 @@ public class Hauptprogramm {
                         System.out.print("Lagernumme: \t" + lager.getLnr());
                         System.out.print("Lagerort: \t" + lager.getLort());
                         System.out.print("Postleitzahl: \t" + lager.getLplz());
-                        System.out.print("Artikelanzahl: \t" + lager.getAnz());
+                        System.out.print("Artikelanzahl: \t" + lager.getAnzart());
                     }
                     catch(Exception e) {
                         System.err.println(e.getMessage());
@@ -202,13 +202,13 @@ public class Hauptprogramm {
         
         System.out.print("Bitte geben Sie die neue Artikelanzahl ein " +
                 "oder drücken die Enter-Taste wenn sie diese nicht " + 
-                "ändern möchten (bisherige wert: " + lager.getAnz() + "): ");
+                "ändern möchten (bisherige wert: " + lager.getAnzart() + "): ");
         try {
             String input = in.readLine();
             if(input.length() > 0) {
                  try {
                     int num = Integer.parseInt(input);
-                    lager.setAnz(num);
+                    lager.setAnzart(num);
                 }
                 catch (NumberFormatException e) {
                     
@@ -226,7 +226,7 @@ public class Hauptprogramm {
         System.out.println("lnr\tlort\tlplz\tanzart");
         for(Lager lager : liste) {
             System.out.println(lager.getLnr() + "\t" + lager.getLort() + "\t" +
-                    lager.getLplz()+ "\t" + lager.getAnz());
+                    lager.getLplz()+ "\t" + lager.getAnzart());
         }
     }
 }
