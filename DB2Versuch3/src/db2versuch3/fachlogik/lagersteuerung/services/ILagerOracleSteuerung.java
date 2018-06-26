@@ -6,5 +6,5 @@ package db2versuch3.fachlogik.lagersteuerung.services;
  * @version 1.0
  */
 public interface ILagerOracleSteuerung {
-    public abstract void lagerCSVErstellen() throws Exception;
+    public abstract boolean lagerCSVErstellen() throws Exception;
 }
