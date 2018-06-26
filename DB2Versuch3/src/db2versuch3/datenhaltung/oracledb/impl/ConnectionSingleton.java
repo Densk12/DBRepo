@@ -15,21 +15,15 @@ public class ConnectionSingleton {
     private static ConnectionSingleton instance;
     private Connection connection;
 
-    static ConnectionSingleton getInstance() throws SQLException {
+    static ConnectionSingleton getInstance() throws Exception {
         if (instance == null) {
             instance = new ConnectionSingleton();
         }
         return instance;
     }
 
-    private ConnectionSingleton() throws SQLException {
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            String error = "\n\tFehler! Der Oracle-Treiber konnte nicht geladen werden!\n\t" + e.toString();
-            System.err.println(error);
-            System.exit(-1);
-        }
+    private ConnectionSingleton() throws Exception {
+        Class.forName("oracle.jdbc.driver.OracleDriver");
 
         OracleDataSource ods = new OracleDataSource();
         String url = "jdbc:oracle:thin:dbprak23/db2017@//schelling.nt.fh-koeln.de:1521/xe";

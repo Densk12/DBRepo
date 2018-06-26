@@ -4,16 +4,19 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 /**
  * Entitaetsklasse Lager
- * 
+ *
  * @version 1.0
  */
 public class Lager {
-    
+
     private String id;
     private String revision;
     private int lnr;
     private String lort;
     private String lplz;
+
+    public Lager() {
+    }
 
     public Lager(String id, String revision, int lnr, String lort, String lplz) {
         this.id = id;
@@ -44,12 +47,12 @@ public class Lager {
     public String getLplz() {
         return lplz;
     }
-    
+
     @JsonProperty("_id")
     public void setId(String id) {
         this.id = id;
     }
-    
+
     @JsonProperty("_rev")
     public void setRevision(String revision) {
         this.revision = revision;
@@ -66,5 +69,5 @@ public class Lager {
     public void setLplz(String lplz) {
         this.lplz = lplz;
     }
-    
+
 }

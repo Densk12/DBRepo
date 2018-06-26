@@ -7,5 +7,5 @@ import java.sql.SQLException;
  * Schnittstellenklasse IDatabase
  */
 public interface IDatabase {
-    public abstract Connection getConnection() throws SQLException;
+    public abstract Connection getConnection() throws Exception;
 }

@@ -17,7 +17,7 @@ public class IDatabaseImpl implements IDatabase {
      * @return Connection
      */
     @Override
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection() throws Exception {
         return ConnectionSingleton.getInstance().getConnection();
     }
     
