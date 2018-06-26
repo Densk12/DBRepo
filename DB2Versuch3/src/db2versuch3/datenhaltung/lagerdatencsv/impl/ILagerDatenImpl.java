@@ -41,9 +41,7 @@ public class ILagerDatenImpl implements ILagerDaten {
                 String sql = "SELECT LA.LNR, LA.LORT, LA.LPLZ FROM LAGERAT LA";
                 rs = stm.executeQuery(sql);
 
-                PrintWriter pw = null;
-
-                pw = new PrintWriter(new FileWriter("Lager.csv"), true);
+                PrintWriter pw = new PrintWriter(new FileWriter("Lager.csv"), true);
 
                 String[] metaData = new String[]{"LNR", "LORT", "LPLZ", "ANZART"};
 
@@ -54,18 +52,27 @@ public class ILagerDatenImpl implements ILagerDaten {
                 pw.println("\"" + metaData[i] + "\"");
 
                 for (i = 0; rs.next(); i++) {
-                    int lnr = rs.getInt("LA.LNR");
-                    String lort = rs.getString("LA.LORT");
-                    String lplz = rs.getString("LA.LPLZ");
+                    int lnr = rs.getInt("LNR");
+                    String lort = rs.getString("LORT");
+                    String lplz = rs.getString("LPLZ");
 
                     sql = "SELECT COUNT(*) ANZART FROM TABLE(SELECT ARTIKELLISTE ";
                     sql += "FROM LAGERAT LA WHERE LA.LNR = " + lnr + ")";
-                    int anzart = stm.executeQuery(sql).getInt("ANZART");
-
+                    Statement stm2 = connection.createStatement();
+                    ResultSet rs2 = stm2.executeQuery(sql);
+                    
+                    int anzart = 0;
+                    if(rs2.next()) {
+                        anzart = rs2.getInt("ANZART");
+                    }
+                    
                     pw.print(lnr + ";");
                     pw.print(lort + ";");
                     pw.print(lplz + ";");
                     pw.println(anzart + "");
+                    
+                    rs2.close();
+                    stm2.close();
                 }
 
                 if (i == 0) {
