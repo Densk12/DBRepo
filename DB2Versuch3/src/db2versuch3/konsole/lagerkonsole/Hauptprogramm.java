@@ -81,7 +81,7 @@ public class Hauptprogramm {
                     break;
                 case 2: // CSV-Daten in CouchDB schreiben
                     try {
-                        if(steu.lagerCSVEinlesen())
+                        if(steu.lagerCSVEinfuegen())
                             System.out.print("OK");
                         else
                             System.out.print("Fehler");

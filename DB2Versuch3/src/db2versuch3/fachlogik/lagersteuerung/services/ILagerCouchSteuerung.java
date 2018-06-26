@@ -13,7 +13,7 @@ import java.util.List;
  * @author marius
  */
 public interface ILagerCouchSteuerung {
-    public boolean lagerCSVEinfuegen(List<Lager> lager) throws Exception;
+    public boolean lagerCSVEinfuegen() throws Exception;
     public List<Lager> lagerAllesAnzeigen() throws Exception;
     public Lager lagerLesenById(int id) throws Exception;
     public boolean lagerUpdate(Lager lager) throws Exception;

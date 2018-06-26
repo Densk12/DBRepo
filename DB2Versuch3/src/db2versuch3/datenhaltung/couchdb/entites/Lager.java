@@ -50,7 +50,7 @@ public class Lager {
         return lplz;
     }
 
-    public int getAnz() {
+    public int getAnzart() {
         return anzart;
     }
     
@@ -76,7 +76,7 @@ public class Lager {
         this.lplz = lplz;
     }
 
-    public void setAnz(int anz) {
-        anzart = anz;
+    public void setAnzart(int anzart) {
+        anzart = anzart;
     }
 }
