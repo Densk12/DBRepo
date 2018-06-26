@@ -15,7 +15,7 @@ public class ConnectionSingleton {
     private static ConnectionSingleton instance;
     private Connection connection;
 
-    static ConnectionSingleton getInstance() throws Exception {
+    public static ConnectionSingleton getInstance() throws Exception {
         if (instance == null) {
             instance = new ConnectionSingleton();
         }

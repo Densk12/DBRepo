@@ -14,16 +14,18 @@ public class Lager {
     private int lnr;
     private String lort;
     private String lplz;
+    private int anzart;
 
     public Lager() {
     }
 
-    public Lager(String id, String revision, int lnr, String lort, String lplz) {
+    public Lager(String id, String revision, int lnr, String lort, String lplz, int anzart) {
         this.id = id;
         this.revision = revision;
         this.lnr = lnr;
         this.lort = lort;
         this.lplz = lplz;
+        this.anzart = anzart;
     }
 
     @JsonProperty("_id")
@@ -48,6 +50,10 @@ public class Lager {
         return lplz;
     }
 
+    public int getAnz() {
+        return anzart;
+    }
+    
     @JsonProperty("_id")
     public void setId(String id) {
         this.id = id;
@@ -70,4 +76,7 @@ public class Lager {
         this.lplz = lplz;
     }
 
+    public void setAnz(int anz) {
+        anzart = anz;
+    }
 }
