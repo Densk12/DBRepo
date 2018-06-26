@@ -1,5 +1,6 @@
 package db2versuch3.konsole.lagerkonsole;
 
+import db2versuch3.datenhaltung.couchdb.entites.Lager;
 import db2versuch3.fachlogik.lagersteuerung.impl.ILagerOracleSteuerungImpl;
 import db2versuch3.fachlogik.lagersteuerung.services.ILagerOracleSteuerung;
 import java.io.BufferedReader;
@@ -38,8 +39,8 @@ public class Hauptprogramm {
                         choice = 7;
                     else {
                         try {
-                            choice = Integer.parseInt(in.readLine());
-                        } catch (IOException e) {
+                            choice = Integer.parseInt(input);
+                        } catch (NumberFormatException e) {
                             String error = "\n\tFehler! Falsche Eingabe";
                             error += "\n\t" + e.toString();
                             System.err.println(error);
@@ -80,6 +81,7 @@ public class Hauptprogramm {
                 case 5:
                     System.out.print("Bitte Lager-ID eingeben: ");
                     choice = getIdInput();
+                    wechselLagerDaten(new Lager());
                     break;
                 case 6:
                     System.out.print("Bitte Lager-ID eingeben: ");
@@ -98,11 +100,82 @@ public class Hauptprogramm {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         try {
             return Integer.parseInt(in.readLine());
-        } catch (IOException e) {
+        }
+        catch (NumberFormatException | IOException e) {
             String error = "\n\tFehler! Falsche Eingabe";
             error += "\n\t" + e.toString();
             System.err.println(error);
             return -1;
         }
+    }
+    
+    private static Lager wechselLagerDaten(Lager lager) {
+        if( lager == null)
+            return null;
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Bitte geben Sie eine neue Lager ID ein " +
+                "oder drücken die Enter-Taste wenn sie diese nicht " + 
+                "ändern möchten (bisherige wert: " + lager.getId() + "): ");
+        try {
+            String input = in.readLine();
+            if(input.length() > 0) {
+                try {
+                    int num = Integer.parseInt(input);
+                    lager.setLnr(num);
+                }
+                catch (NumberFormatException e) {
+                    
+                }
+            }
+        } catch (IOException e) {
+            
+        }
+        
+        System.out.print("Bitte geben Sie einen neuen Lagerstandort ein " +
+                "oder drücken die Enter-Taste wenn sie es nicht " + 
+                "ändern möchten (bisherige wert: " + lager.getLort() + "): ");
+        try {
+            String input = in.readLine();
+            if(input.length() > 0) {
+                lager.setLort(input);
+            }
+        }
+        catch(IOException e) {
+            
+        }
+        
+        System.out.print("Bitte geben Sie eine neue Postleitzahl ein " +
+                "oder drücken die Enter-Taste wenn sie diese nicht " + 
+                "ändern möchten (bisherige wert: " + lager.getLplz() + "): ");
+        try {
+            String input = in.readLine();
+            if(input.length() > 0) {
+                lager.setLplz(input);
+            }
+        }
+        catch(IOException e) {
+            
+        }
+        
+        System.out.print("Bitte geben Sie die neue Artikelanzahl ein " +
+                "oder drücken die Enter-Taste wenn sie diese nicht " + 
+                "ändern möchten (bisherige wert: " + lager.getAnz() + "): ");
+        try {
+            String input = in.readLine();
+            if(input.length() > 0) {
+                 try {
+                    int num = Integer.parseInt(input);
+                    lager.setAnz(num);
+                }
+                catch (NumberFormatException e) {
+                    
+                }
+            }
+        }
+        catch(IOException e) {
+            
+        }
+        
+        return lager;
     }
 }
