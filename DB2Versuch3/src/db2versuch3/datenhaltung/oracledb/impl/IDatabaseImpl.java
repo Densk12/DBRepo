@@ -2,7 +2,6 @@ package db2versuch3.datenhaltung.oracledb.impl;
 
 import db2versuch3.datenhaltung.oracledb.services.IDatabase;
 import java.sql.Connection;
-import java.sql.SQLException;
 
 /**
  * Klasse IDatabaseImpl - Implementiert alle Methoden der Schnittstellenklasse
@@ -15,6 +14,7 @@ public class IDatabaseImpl implements IDatabase {
     /**
      * Methode getConnection - liefert ein konsistentes Medium zur Oracle-DB
      * @return Connection
+     * @throws java.lang.Exception
      */
     @Override
     public Connection getConnection() throws Exception {

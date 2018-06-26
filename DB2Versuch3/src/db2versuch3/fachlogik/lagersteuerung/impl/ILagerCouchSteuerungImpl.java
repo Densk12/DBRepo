@@ -15,19 +15,24 @@ import java.util.List;
  * @author marius
  */
 public class ILagerCouchSteuerungImpl implements ILagerCouchSteuerung {
+    @Override
     public boolean lagerCSVEinlesen() {
         return false;
     }
+    @Override
     public List<Lager> lagerAllesAnzeigen() {
         List<Lager> lager = new LinkedList<>();
         return lager;
     }
+    @Override
     public Lager lagerLesenById(int id) {
         return null;
     }
+    @Override
     public boolean lagerUpdate(Lager lager) {
         return false;
     }
+    @Override
     public boolean lagerDeleteById(int id) {
         return false;
     }
