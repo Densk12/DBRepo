@@ -1,11 +1,14 @@
 package db2versuch3.konsole.lagerkonsole;
 
 import db2versuch3.datenhaltung.couchdb.entites.Lager;
+import db2versuch3.fachlogik.lagersteuerung.impl.ILagerCouchSteuerungImpl;
 import db2versuch3.fachlogik.lagersteuerung.impl.ILagerOracleSteuerungImpl;
+import db2versuch3.fachlogik.lagersteuerung.services.ILagerCouchSteuerung;
 import db2versuch3.fachlogik.lagersteuerung.services.ILagerOracleSteuerung;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 /**
  * Klasse Hauptrogramm - realisiert die Interaktion mit dem Benutzer. Verwendet
@@ -21,14 +24,22 @@ public class Hauptprogramm {
         do {
             choice = -1;
             System.out.println("\tMenue:");
-            System.out.println("0\tLager.csv erzeugen");
-            System.out.println("1\tAnlegen eines CouchDB-Segmentes");
+            System.out.println("1\tLager.csv erzeugen");
             System.out.println("2\tDatensätze aus Lager.csv in CouchDB-Segment einfügen");
             System.out.println("3\tDaten aus CouchDB-Segment lesen");
             System.out.println("4\tDatensatz anhand einer ID aus CouchDB lesen");
             System.out.println("5\tDatensatz ändern");
             System.out.println("6\tDatensatz anhand einer ID aus CouchDB löschen");
             System.out.println("q\tBeenden");
+            
+            ILagerCouchSteuerung steu;
+            try {
+                steu = new ILagerCouchSteuerungImpl();
+            }
+            catch(Exception e) {
+                System.err.println(e.getMessage());
+                return;
+            }
 
             String input;
             do {
@@ -55,10 +66,10 @@ public class Hauptprogramm {
                     choice = -1;
                 }
                 
-            } while (choice > 7 || choice < 0);
+            } while (choice > 7 || choice < 1);
 
             switch (choice) {
-                case 0:
+                case 1: // Daten aus Oracle holen und in eine CSV-Datei schreiben
                     ILagerOracleSteuerung lagerSteu = new ILagerOracleSteuerungImpl();
                     try {
                         lagerSteu.lagerCSVErstellen();
@@ -68,26 +79,58 @@ public class Hauptprogramm {
                         System.err.println(error);
                     }
                     break;
-                case 1:
+                case 2: // CSV-Daten in CouchDB schreiben
+                    try {
+                        if(steu.lagerCSVEinlesen())
+                            System.out.print("OK");
+                        else
+                            System.out.print("Fehler");
+                    }
+                    catch(Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
-                case 2:
+                case 3: // Alle Datensätze aus CouchDB anzeigen
+                    try {
+                        showAlles(steu.lagerAllesAnzeigen());
+                    }
+                    catch(Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
-                case 3:
-                    break;
-                case 4:
+                case 4: // Lager-Datensatz anhand einer ID anzeigen
                     System.out.print("Bitte Lager-ID eingeben: ");
                     choice = getIdInput();
+                    try {
+                        Lager lager = steu.lagerLesenById(choice);
+                        System.out.print("Lagernumme: \t" + lager.getLnr());
+                        System.out.print("Lagerort: \t" + lager.getLort());
+                        System.out.print("Postleitzahl: \t" + lager.getLplz());
+                        System.out.print("Artikelanzahl: \t" + lager.getAnz());
+                    }
+                    catch(Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
-                case 5:
+                case 5: // Lager-Datensatz bearbeiten
                     System.out.print("Bitte Lager-ID eingeben: ");
                     choice = getIdInput();
                     wechselLagerDaten(new Lager());
                     break;
-                case 6:
+                case 6: // Lager-Datensatz löschen
                     System.out.print("Bitte Lager-ID eingeben: ");
                     choice = getIdInput();
+                    try {
+                        if(steu.lagerDeleteById(choice))
+                            System.out.print("Datensatz wurde entfernt");
+                        else
+                            System.out.print("Fehler");
+                    }
+                    catch(Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
-                case 7:
+                case 7: // Programm verlassen
                     System.out.println("\nAuf Wiedersehen!");
                     break;
             }
@@ -177,5 +220,13 @@ public class Hauptprogramm {
         }
         
         return lager;
+    }
+    
+    private static void showAlles(List<Lager> liste) {
+        System.out.println("lnr\tlort\tlplz\tanzart");
+        for(Lager lager : liste) {
+            System.out.println(lager.getLnr() + "\t" + lager.getLort() + "\t" +
+                    lager.getLplz()+ "\t" + lager.getAnz());
+        }
     }
 }
