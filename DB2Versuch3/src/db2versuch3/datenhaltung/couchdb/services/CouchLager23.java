@@ -9,7 +9,7 @@ import java.util.List;
  * @version 1.0
  */
 public interface CouchLager23 {
-    public abstract boolean lagerCSVEinfuegen();
+    public abstract boolean lagerCSVEinfuegen() throws Exception;
     public abstract List<Lager> lagerAllesLesen();
     public abstract Lager lagerLesenById(int id);
     public abstract boolean lagerUpdate(Lager lager);
