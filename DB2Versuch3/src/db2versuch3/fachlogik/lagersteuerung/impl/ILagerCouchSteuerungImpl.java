@@ -16,7 +16,8 @@ import java.util.List;
  */
 public class ILagerCouchSteuerungImpl implements ILagerCouchSteuerung {
     @Override
-    public boolean lagerCSVEinlesen() {
+    public boolean lagerCSVEinlesen(List<Lager> lagerListe) {
+        
         return false;
     }
     @Override

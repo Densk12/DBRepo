@@ -20,9 +20,9 @@ public class ICouchLager23Impl implements ICouchLager23 {
     CouchDbConnector couchDbConnector;
             
     public void setConnection(CouchDbConnector couchDbConnector) throws Exception {
-        if(couchDbConnector == null)
-            throw new NullPointerException();
-        this.couchDbConnector = couchDbConnector;
+        if(couchDbConnector != null) {
+            this.couchDbConnector = couchDbConnector;
+        }
     }
     public boolean lagerCSVEinfuegen(List<Lager> lagerListe) {
         if(lagerListe != null) {
