@@ -13,9 +13,9 @@ import java.util.List;
  * @author marius
  */
 public interface ILagerCouchSteuerung {
-    public boolean lagerCSVEinlesen();
-    public List<Lager> lagerAllesAnzeigen();
-    public Lager lagerLesenById(int id);
-    public boolean lagerUpdate(Lager lager);
-    public boolean lagerDeleteById(int id);
+    public boolean lagerCSVEinlesen() throws Exception;
+    public List<Lager> lagerAllesAnzeigen() throws Exception;
+    public Lager lagerLesenById(int id) throws Exception;
+    public boolean lagerUpdate(Lager lager) throws Exception;
+    public boolean lagerDeleteById(int id) throws Exception;
 }
