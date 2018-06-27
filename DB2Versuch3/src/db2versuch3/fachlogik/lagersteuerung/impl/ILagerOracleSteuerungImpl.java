@@ -27,6 +27,7 @@ public class ILagerOracleSteuerungImpl implements ILagerOracleSteuerung {
      */
     @Override
     public boolean lagerCSVErstellen() throws Exception {
+        
         boolean ret = false;
 
         String filename = "Lager.csv";
@@ -36,17 +37,21 @@ public class ILagerOracleSteuerungImpl implements ILagerOracleSteuerung {
 
         ILagerSQL iLagerSql = new ILagerSQLImpl();
         iLagerSql.setConnection(connection);
+        
         List<Lager> lagerListe = iLagerSql.getAlleLager();
 
         if (lagerListe != null && lagerListe.size() > 0) {
+            
             ILagerCSV iLager = new ILagerCSVImpl();
             iLager.setFilename(filename);
 
             String[] spalten = new String[]{"LNR", "LORT", "LPLZ", "ANZART"};
             ret = iLager.lagerToCSV(spalten, lagerListe);      
+            
         }
         
         return ret;
+        
     }
 
 }
