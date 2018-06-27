@@ -12,7 +12,7 @@ public interface ICouchLager23 {
     public void setConnection(CouchDbConnector couchDbConnector) throws Exception;
     public boolean lagerCSVEinfuegen(List<Lager> lagerListe);
     public List<Lager> lagerAllesLesen();
-    public Lager lagerLesenById(int id);
+    public Lager lagerLesenById(String id);
     public boolean lagerUpdate(Lager lager);
-    public boolean lagerDeleteById(int id);
+    public boolean lagerDeleteById(String id);
 }

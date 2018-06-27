@@ -18,17 +18,14 @@ public class ILagerCouchSteuerungImpl implements ILagerCouchSteuerung {
     private CouchDbConnector db;
 
     public ILagerCouchSteuerungImpl() throws Exception {
-
         db2versuch3.datenhaltung.couchdb.services.IDatabase data
                 = new db2versuch3.datenhaltung.couchdb.impl.IDatabaseImpl();
 
         db = data.getConnection("Lager23");
-
     }
 
     @Override
     public boolean lagerCSVEinfuegen() throws Exception {
-
         boolean ret = false;
 
         if (db != null) {
@@ -67,12 +64,10 @@ public class ILagerCouchSteuerungImpl implements ILagerCouchSteuerung {
         }
 
         return ret;
-
     }
 
     @Override
     public List<db2versuch3.datenhaltung.couchdb.entites.Lager> lagerAllesAnzeigen() throws Exception {
-
         List<db2versuch3.datenhaltung.couchdb.entites.Lager> lagerListe = null;
 
         if (db != null) {
@@ -85,12 +80,10 @@ public class ILagerCouchSteuerungImpl implements ILagerCouchSteuerung {
         }
 
         return lagerListe;
-
     }
 
     @Override
-    public db2versuch3.datenhaltung.couchdb.entites.Lager lagerLesenById(int id) throws Exception {
-
+    public db2versuch3.datenhaltung.couchdb.entites.Lager lagerLesenById(String id) throws Exception {
         db2versuch3.datenhaltung.couchdb.entites.Lager lager = null;
 
         if (db != null) {
@@ -103,12 +96,10 @@ public class ILagerCouchSteuerungImpl implements ILagerCouchSteuerung {
         }
 
         return lager;
-
     }
 
     @Override
     public boolean lagerUpdate(db2versuch3.datenhaltung.couchdb.entites.Lager lager) throws Exception {
-
         boolean ret = false;
 
         if (db != null) {
@@ -121,12 +112,10 @@ public class ILagerCouchSteuerungImpl implements ILagerCouchSteuerung {
         }
 
         return ret;
-
     }
 
     @Override
-    public boolean lagerDeleteById(int id) throws Exception {
-
+    public boolean lagerDeleteById(String id) throws Exception {
         boolean ret = false;
 
         if (db != null) {
@@ -137,8 +126,8 @@ public class ILagerCouchSteuerungImpl implements ILagerCouchSteuerung {
             ret = iCouch.lagerDeleteById(id);
 
         }
-        
+
         return ret;
-        
     }
+
 }
