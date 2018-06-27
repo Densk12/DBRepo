@@ -136,6 +136,7 @@ public class Hauptprogramm {
                     System.out.println("\nAuf Wiedersehen!");
                     break;
             }
+            System.out.println(" ");
 
         } while (choice != 7);
 

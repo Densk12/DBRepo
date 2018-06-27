@@ -99,37 +99,16 @@ public class ILagerCSVImpl implements ILagerCSV {
             int zaehler = 0;
 
             while ((datensatz = in.readLine()) != null) {
-
-                for (int i = 0; i < datensatz.length(); i++) {
-
-                    if (datensatz.charAt(i) == ',') {
-
-                        zaehler++;
-                        i++;
-
-                    }
-
-                    switch (zaehler) {
-
-                        case 0:
-                            lnr += datensatz.charAt(i);
-                            break;
-
-                        case 1:
-                            lort += datensatz.charAt(i);
-                            break;
-
-                        case 2:
-                            lplz += datensatz.charAt(i);
-                            break;
-
-                        case 3:
-                            anzart += datensatz.charAt(i);
-                            break;
-
-                    }
-
-                }
+                
+                String[] felder = datensatz.split(",");
+                if(felder.length > 0)
+                    lnr = felder[0];
+                if(felder.length > 1)
+                    lort = felder[1];
+                if(felder.length > 2)
+                    lplz = felder[2];
+                if(felder.length > 3)
+                    anzart = felder[3];
 
                 Lager lager = new Lager(Integer.parseInt(lnr), lort, lplz, Integer.parseInt(anzart));
 
