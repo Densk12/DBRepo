@@ -105,10 +105,10 @@ public class Hauptprogramm {
                     id = getIdInput();
                     try {
                         Lager lager = steu.lagerLesenById(id);
-                        System.out.print("Lagernumme: \t" + lager.getLnr());
-                        System.out.print("Lagerort: \t" + lager.getLort());
-                        System.out.print("Postleitzahl: \t" + lager.getLplz());
-                        System.out.print("Artikelanzahl: \t" + lager.getAnzart());
+                        System.out.println("Lagernumme: \t" + lager.getLnr());
+                        System.out.println("Lagerort: \t" + lager.getLort());
+                        System.out.println("Postleitzahl: \t" + lager.getLplz());
+                        System.out.println("Artikelanzahl: \t" + lager.getAnzart());
                     } catch (Exception e) {
                         System.err.println(e.getMessage());
                     }

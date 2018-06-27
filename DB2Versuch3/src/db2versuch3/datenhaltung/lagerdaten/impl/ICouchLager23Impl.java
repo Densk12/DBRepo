@@ -84,11 +84,9 @@ public class ICouchLager23Impl implements ICouchLager23 {
         if (couchDbConnector != null && id != null) {
 
             Lager lager = couchDbConnector.get(Lager.class, id);
-
             if (lager != null) {
-
-                couchDbConnector.delete(id);
-
+                couchDbConnector.delete(lager);
+                return true;
             }
 
         }

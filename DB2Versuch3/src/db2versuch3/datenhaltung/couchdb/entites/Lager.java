@@ -77,6 +77,6 @@ public class Lager {
     }
 
     public void setAnzart(int anzart) {
-        anzart = anzart;
+        this.anzart = anzart;
     }
 }
