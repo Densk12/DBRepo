@@ -1,4 +1,4 @@
-"LNR";"LORT";"LPLZ";"ANZART"
-3;Leipzig;33333;1
-1;Koeln;11111;2
-2;Berlin;22222;3
+"LNR","LORT","LPLZ","ANZART"
+3,Leipzig,33333,1
+1,Koeln,11111,2
+2,Berlin,22222,3

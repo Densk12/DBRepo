@@ -40,6 +40,7 @@ public class ILagerSQLImpl implements ILagerSQL {
             ResultSet rs = stm.executeQuery(sql);
             
             while(rs.next()) {
+                int anzart = 0;
                 int lnr = rs.getInt("LNR");
                 String lort = rs.getString("LORT");
                 String lplz = rs.getString("LPLZ");
@@ -48,9 +49,9 @@ public class ILagerSQLImpl implements ILagerSQL {
                         + " LAGERAT WHERE LNR = " + lnr + ")";
                 Statement stm2 = connection.createStatement();
                 ResultSet rs2 = stm2.executeQuery(sql);
-                
-                int anzart = rs2.getInt("ANZART");
-                
+                while(rs2.next()) {
+                    anzart = rs2.getInt("ANZART");
+                }
                 stm2.close();
                 rs2.close();
                 
