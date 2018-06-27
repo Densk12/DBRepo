@@ -101,7 +101,7 @@ public class Hauptprogramm {
                     break;
                     
                 case 4: // Lager-Datensatz anhand einer ID anzeigen
-                    System.out.print("Bitte Lager-ID eingeben: ");
+                    System.out.print("Bitte Datensatz-ID eingeben: ");
                     id = getIdInput();
                     try {
                         Lager lager = steu.lagerLesenById(id);
@@ -115,11 +115,23 @@ public class Hauptprogramm {
                     break;
                     
                 case 5: // Lager-Datensatz bearbeiten
-                    wechselLagerDaten(new Lager());
+                    System.out.print("Bitte Datensatz-ID eingeben: ");
+                    id = getIdInput();
+                    try {
+                        Lager lager = steu.lagerLesenById(id);
+                        wechselLagerDaten(lager);
+                        if(steu.lagerUpdate(lager))
+                            System.out.print("Datensatz wurde geändert");
+                        else
+                            System.out.print("Fehler");
+                    }
+                    catch (Exception e) {
+                        System.err.println(e.getMessage());
+                    }
                     break;
                     
                 case 6: // Lager-Datensatz löschen
-                    System.out.print("Bitte Lager-ID eingeben: ");
+                    System.out.print("Bitte Datensatz-ID eingeben: ");
                     id = getIdInput();
                     try {
                         if (steu.lagerDeleteById(id)) {
@@ -161,7 +173,7 @@ public class Hauptprogramm {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Bitte geben Sie eine neue Lager ID ein "
                 + "oder drücken die Enter-Taste wenn sie diese nicht "
-                + "ändern möchten (bisherige wert: " + lager.getId() + "): ");
+                + "ändern möchten (bisherige wert: " + lager.getLnr() + "): ");
         try {
             String input = in.readLine();
             if (input.length() > 0) {

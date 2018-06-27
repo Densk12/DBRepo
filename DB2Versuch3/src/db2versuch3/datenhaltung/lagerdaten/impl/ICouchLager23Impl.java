@@ -79,7 +79,6 @@ public class ICouchLager23Impl implements ICouchLager23 {
     }
 
     public boolean lagerDeleteById(String id) {
-        boolean ret = false;
 
         if (couchDbConnector != null && id != null) {
 
