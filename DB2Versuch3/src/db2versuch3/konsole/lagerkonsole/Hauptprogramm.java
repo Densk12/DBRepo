@@ -105,7 +105,9 @@ public class Hauptprogramm {
                     id = getIdInput();
                     try {
                         Lager lager = steu.lagerLesenById(id);
-                        System.out.println("Lagernumme: \t" + lager.getLnr());
+                        System.out.println("Datensatz-ID: \t" + lager.getId());
+                        System.out.println("Version: \t" + lager.getRevision());
+                        System.out.println("Lagernummer: \t" + lager.getLnr());
                         System.out.println("Lagerort: \t" + lager.getLort());
                         System.out.println("Postleitzahl: \t" + lager.getLplz());
                         System.out.println("Artikelanzahl: \t" + lager.getAnzart());
@@ -233,10 +235,10 @@ public class Hauptprogramm {
     }
 
     private static void showAlles(List<Lager> liste) {
-        System.out.println("lnr\tlort\tlplz\tanzart");
+        System.out.println("id\t\t\t\t\tlnr\tlort\tlplz\tanzart\trevision");
         for (Lager lager : liste) {
-            System.out.println(lager.getLnr() + "\t" + lager.getLort() + "\t"
-                    + lager.getLplz() + "\t" + lager.getAnzart());
+            System.out.println(lager.getId() + "\t" + lager.getLnr() + "\t" + lager.getLort() + "\t"
+                    + lager.getLplz() + "\t" + lager.getAnzart()+ "\t" + lager.getRevision());
         }
     }
 }

@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/marius/Documents/NetBeansProjects/DBRepo/DB2Versuch3/src/db2versuch3/fachlogik/lagersteuerung/impl/ILagerOracleSteuerungImpl.java</file>
+            <file>file:/C:/Users/marius/Documents/NetBeansProjects/DBRepo/DB2Versuch3/src/db2versuch3/konsole/lagerkonsole/Hauptprogramm.java</file>
+            <file>file:/C:/Users/marius/Documents/NetBeansProjects/DBRepo/DB2Versuch3/src/db2versuch3/fachlogik/lagersteuerung/impl/ILagerCouchSteuerungImpl.java</file>
+            <file>file:/C:/Users/marius/Documents/NetBeansProjects/DBRepo/DB2Versuch3/src/db2versuch3/datenhaltung/lagerdaten/impl/ICouchLager23Impl.java</file>
+        </group>
     </open-files>
 </project-private>
